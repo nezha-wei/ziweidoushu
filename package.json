@@ -1,0 +1,27 @@
+{
+  "name": "ziwei-doushu",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "紫微斗数 · 可交互的人生星盘推演 — 2026 Qoder 高校创造力大赛 LifeHack 赛道原创作品",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test:engine": "node scripts/smoke.mjs",
+    "test:ui": "node scripts/uitest.mjs",
+    "pack:share": "node scripts/pack-share.mjs",
+    "test:offline": "node scripts/verify-offline.mjs",
+    "docs:examples": "node scripts/gen-examples.mjs"
+  },
+  "dependencies": {
+    "iztro": "^2.5.8",
+    "lunar-javascript": "^1.7.3"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^19.11.1",
+    "typescript": "^5.4.5",
+    "vite": "^4.5.3"
+  }
+}

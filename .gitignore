@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-share/
+release/
+shots/
+image/
+*.local
+.DS_Store
+scripts/_*-bundle.mjs
+scripts/_t.mjs

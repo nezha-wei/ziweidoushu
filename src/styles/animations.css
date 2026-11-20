@@ -1,0 +1,70 @@
+/* 动画层：编排入场 / 罗盘旋转 / 飞星流动 / 滚动揭示 / 海报廊 */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes flight-dash {
+  to { stroke-dashoffset: -64; }
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: 0.35; transform: scaleY(0.7); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes quote-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stage-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 刊头分级入场序列 */
+.anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .anim-6 {
+  opacity: 0;
+  animation: rise-in 0.85s var(--ease) forwards;
+}
+.anim-1 { animation-delay: 0.05s; }
+.anim-2 { animation-delay: 0.18s; }
+.anim-3 { animation-delay: 0.34s; }
+.anim-4 { animation-delay: 0.5s; }
+.anim-5 { animation-delay: 0.66s; }
+.anim-6 { animation-delay: 0.82s; }
+
+/* 古籍轮播 */
+.quote-in .hero-quote-text, .quote-in .hero-quote-src { animation: quote-fade 0.7s ease both; }
+
+/* 命盘入场 */
+.chart-stage { animation: stage-in 0.9s var(--ease) both; }
+
+/* 滚动揭示（分区头 / 卡片 / 海报 / 古籍） */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* 抽屉内段落级联 */
+.drawer-root.open .drawer-para { animation: quote-fade 0.5s ease both; }
+.drawer-root.open .drawer-para:nth-child(2) { animation-delay: 0.06s; }
+.drawer-root.open .drawer-para:nth-child(3) { animation-delay: 0.12s; }
+.drawer-root.open .drawer-para:nth-child(4) { animation-delay: 0.18s; }
+.drawer-root.open .drawer-para:nth-child(5) { animation-delay: 0.24s; }
+
+/* 大限详情切换 */
+.tl-detail-card { animation: quote-fade 0.55s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .anim-6, .reveal { opacity: 1; transform: none; animation: none; }
+  .center-spin, .flight-path, .hero-scroll-line { animation: none; }
+}

@@ -1,0 +1,1243 @@
+{
+  "ok": true,
+  "data": {
+    "id": "2000-08-16-2-female-split-forward-normal-1-1",
+    "input": {
+      "calendar": "solar",
+      "year": 2000,
+      "month": 8,
+      "day": 16,
+      "hour": 4,
+      "minute": 30,
+      "gender": "female",
+      "birthplaceId": "hangzhou",
+      "longitude": 120.15,
+      "useTrueSolarTime": true,
+      "dstAdjust": true,
+      "leapPolicy": "split",
+      "ziHourPolicy": "forward",
+      "yearDivide": "normal",
+      "nickname": "示例星旅人"
+    },
+    "correction": {
+      "trueSolarApplied": true,
+      "longitudeOffsetMin": 0.6,
+      "equationOfTimeMin": -3.7,
+      "dstOffsetMin": 0,
+      "correctedClock": "04:27",
+      "correctedDate": "2000-08-16",
+      "timeIndex": 2,
+      "timeName": "寅时",
+      "inDstSpan": false,
+      "notes": [
+        "真太阳时校正：经度差 +0.6 分 + 均时差 -3.7 分。"
+      ],
+      "solarYear": 2000,
+      "solarMonth": 8,
+      "solarDay": 16
+    },
+    "solarDate": "2000-08-16",
+    "lunarDate": "二〇〇〇年七月十七",
+    "ganzhi": "庚辰 甲申 丙午 庚寅",
+    "timeName": "寅时",
+    "timeRange": "03:00~05:00",
+    "zodiac": "龙",
+    "sign": "狮子座",
+    "soulBranch": "午",
+    "bodyBranch": "戌",
+    "soulMaster": "破军",
+    "bodyMaster": "文昌",
+    "fiveElements": "木三局",
+    "genderLabel": "女",
+    "palaces": [
+      {
+        "index": 0,
+        "name": "财帛",
+        "branch": "寅",
+        "stem": "戊",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "武曲",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "得",
+            "mutagen": "权"
+          },
+          {
+            "name": "天相",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "天马",
+            "type": "tianma",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "解神",
+            "type": "helper",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "三台",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天寿",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天巫",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天厨",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "阴煞",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天哭",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "绝",
+        "boshi12": "飞廉",
+        "decadal": {
+          "range": [
+            43,
+            52
+          ],
+          "stem": "戊",
+          "branch": "寅"
+        },
+        "ages": [
+          9,
+          21,
+          33,
+          45,
+          57,
+          69,
+          81,
+          93,
+          105,
+          117
+        ]
+      },
+      {
+        "index": 1,
+        "name": "子女",
+        "branch": "卯",
+        "stem": "己",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "太阳",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙",
+            "mutagen": "禄"
+          },
+          {
+            "name": "天梁",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙"
+          }
+        ],
+        "minorStars": [],
+        "adjectiveStars": [
+          {
+            "name": "天刑",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "墓",
+        "boshi12": "奏书",
+        "decadal": {
+          "range": [
+            33,
+            42
+          ],
+          "stem": "己",
+          "branch": "卯"
+        },
+        "ages": [
+          8,
+          20,
+          32,
+          44,
+          56,
+          68,
+          80,
+          92,
+          104,
+          116
+        ]
+      },
+      {
+        "index": 2,
+        "name": "夫妻",
+        "branch": "辰",
+        "stem": "庚",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": true,
+        "majorStars": [
+          {
+            "name": "七杀",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "右弼",
+            "type": "soft",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "火星",
+            "type": "tough",
+            "scope": "origin",
+            "brightness": "陷"
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "封诰",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "华盖",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "死",
+        "boshi12": "将军",
+        "decadal": {
+          "range": [
+            23,
+            32
+          ],
+          "stem": "庚",
+          "branch": "辰"
+        },
+        "ages": [
+          7,
+          19,
+          31,
+          43,
+          55,
+          67,
+          79,
+          91,
+          103,
+          115
+        ]
+      },
+      {
+        "index": 3,
+        "name": "兄弟",
+        "branch": "巳",
+        "stem": "辛",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "天机",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "平"
+          }
+        ],
+        "minorStars": [],
+        "adjectiveStars": [
+          {
+            "name": "天喜",
+            "type": "flower",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天空",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "孤辰",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "病",
+        "boshi12": "小耗",
+        "decadal": {
+          "range": [
+            13,
+            22
+          ],
+          "stem": "辛",
+          "branch": "巳"
+        },
+        "ages": [
+          6,
+          18,
+          30,
+          42,
+          54,
+          66,
+          78,
+          90,
+          102,
+          114
+        ]
+      },
+      {
+        "index": 4,
+        "name": "命宫",
+        "branch": "午",
+        "stem": "壬",
+        "isSoul": true,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "紫微",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "文曲",
+            "type": "soft",
+            "scope": "origin",
+            "brightness": "陷"
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "凤阁",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天福",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "截路",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "蜚廉",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "年解",
+            "type": "helper",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "衰",
+        "boshi12": "青龙",
+        "decadal": {
+          "range": [
+            3,
+            12
+          ],
+          "stem": "壬",
+          "branch": "午"
+        },
+        "ages": [
+          5,
+          17,
+          29,
+          41,
+          53,
+          65,
+          77,
+          89,
+          101,
+          113
+        ]
+      },
+      {
+        "index": 5,
+        "name": "父母",
+        "branch": "未",
+        "stem": "癸",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [],
+        "minorStars": [
+          {
+            "name": "天钺",
+            "type": "soft",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "陀罗",
+            "type": "tough",
+            "scope": "origin",
+            "brightness": "庙"
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "天姚",
+            "type": "flower",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "空亡",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "帝旺",
+        "boshi12": "力士",
+        "decadal": {
+          "range": [
+            113,
+            122
+          ],
+          "stem": "癸",
+          "branch": "未"
+        },
+        "ages": [
+          4,
+          16,
+          28,
+          40,
+          52,
+          64,
+          76,
+          88,
+          100,
+          112
+        ]
+      },
+      {
+        "index": 6,
+        "name": "福德",
+        "branch": "申",
+        "stem": "甲",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "破军",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "得"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "文昌",
+            "type": "soft",
+            "scope": "origin",
+            "brightness": "得"
+          },
+          {
+            "name": "禄存",
+            "type": "lucun",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "龙池",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "台辅",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "旬空",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "临官",
+        "boshi12": "博士",
+        "decadal": {
+          "range": [
+            103,
+            112
+          ],
+          "stem": "甲",
+          "branch": "申"
+        },
+        "ages": [
+          3,
+          15,
+          27,
+          39,
+          51,
+          63,
+          75,
+          87,
+          99,
+          111
+        ]
+      },
+      {
+        "index": 7,
+        "name": "田宅",
+        "branch": "酉",
+        "stem": "乙",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [],
+        "minorStars": [
+          {
+            "name": "地空",
+            "type": "tough",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "擎羊",
+            "type": "tough",
+            "scope": "origin",
+            "brightness": "陷"
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "咸池",
+            "type": "flower",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天贵",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "月德",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "冠带",
+        "boshi12": "官府",
+        "decadal": {
+          "range": [
+            93,
+            102
+          ],
+          "stem": "乙",
+          "branch": "酉"
+        },
+        "ages": [
+          2,
+          14,
+          26,
+          38,
+          50,
+          62,
+          74,
+          86,
+          98,
+          110
+        ]
+      },
+      {
+        "index": 8,
+        "name": "官禄",
+        "branch": "戌",
+        "stem": "丙",
+        "isSoul": false,
+        "isBody": true,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "廉贞",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "利"
+          },
+          {
+            "name": "天府",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "左辅",
+            "type": "soft",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "天才",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天虚",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "沐浴",
+        "boshi12": "伏兵",
+        "decadal": {
+          "range": [
+            83,
+            92
+          ],
+          "stem": "丙",
+          "branch": "戌"
+        },
+        "ages": [
+          1,
+          13,
+          25,
+          37,
+          49,
+          61,
+          73,
+          85,
+          97,
+          109
+        ]
+      },
+      {
+        "index": 9,
+        "name": "仆役",
+        "branch": "亥",
+        "stem": "丁",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "太阴",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "庙",
+            "mutagen": "科"
+          }
+        ],
+        "minorStars": [],
+        "adjectiveStars": [
+          {
+            "name": "红鸾",
+            "type": "flower",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "恩光",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天官",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天月",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天伤",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "长生",
+        "boshi12": "大耗",
+        "decadal": {
+          "range": [
+            73,
+            82
+          ],
+          "stem": "丁",
+          "branch": "亥"
+        },
+        "ages": [
+          12,
+          24,
+          36,
+          48,
+          60,
+          72,
+          84,
+          96,
+          108,
+          120
+        ]
+      },
+      {
+        "index": 10,
+        "name": "迁移",
+        "branch": "子",
+        "stem": "戊",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "贪狼",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "旺"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "铃星",
+            "type": "tough",
+            "scope": "origin",
+            "brightness": "陷"
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "八座",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "养",
+        "boshi12": "病符",
+        "decadal": {
+          "range": [
+            63,
+            72
+          ],
+          "stem": "戊",
+          "branch": "子"
+        },
+        "ages": [
+          11,
+          23,
+          35,
+          47,
+          59,
+          71,
+          83,
+          95,
+          107,
+          119
+        ]
+      },
+      {
+        "index": 11,
+        "name": "疾厄",
+        "branch": "丑",
+        "stem": "己",
+        "isSoul": false,
+        "isBody": false,
+        "isOriginal": false,
+        "majorStars": [
+          {
+            "name": "天同",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "不",
+            "mutagen": "忌"
+          },
+          {
+            "name": "巨门",
+            "type": "major",
+            "scope": "origin",
+            "brightness": "不"
+          }
+        ],
+        "minorStars": [
+          {
+            "name": "天魁",
+            "type": "soft",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "地劫",
+            "type": "tough",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "adjectiveStars": [
+          {
+            "name": "天德",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "寡宿",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "破碎",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          },
+          {
+            "name": "天使",
+            "type": "adjective",
+            "scope": "origin",
+            "brightness": ""
+          }
+        ],
+        "changsheng12": "胎",
+        "boshi12": "喜神",
+        "decadal": {
+          "range": [
+            53,
+            62
+          ],
+          "stem": "己",
+          "branch": "丑"
+        },
+        "ages": [
+          10,
+          22,
+          34,
+          46,
+          58,
+          70,
+          82,
+          94,
+          106,
+          118
+        ]
+      }
+    ],
+    "soulIndex": 4,
+    "bodyIndex": 8,
+    "natalFlights": [
+      {
+        "mutagen": "禄",
+        "star": "太阳",
+        "fromIndex": 2,
+        "toIndex": 1,
+        "self": false
+      },
+      {
+        "mutagen": "权",
+        "star": "武曲",
+        "fromIndex": 2,
+        "toIndex": 0,
+        "self": false
+      },
+      {
+        "mutagen": "科",
+        "star": "太阴",
+        "fromIndex": 2,
+        "toIndex": 9,
+        "self": false
+      },
+      {
+        "mutagen": "忌",
+        "star": "天同",
+        "fromIndex": 2,
+        "toIndex": 11,
+        "self": false
+      }
+    ],
+    "patterns": [
+      {
+        "id": "zifu-chaoyuan",
+        "name": "紫府朝垣",
+        "grade": "upper",
+        "palaces": [
+          "命宫"
+        ],
+        "stars": [
+          "紫微",
+          "天府"
+        ],
+        "summary": "紫微天府从三方四正来朝，贵气环绕，易得平台与贵人托举，适合借力成事。"
+      },
+      {
+        "id": "fuxiang-chaoyuan",
+        "name": "府相朝垣",
+        "grade": "upper",
+        "palaces": [
+          "命宫"
+        ],
+        "stars": [
+          "天府",
+          "天相"
+        ],
+        "summary": "天府天相来朝，库印相扶，衣食丰足、贵人提携，是稳健富足之格。"
+      }
+    ],
+    "metrics": {
+      "career": 70,
+      "wealth": 72,
+      "love": 62,
+      "health": 32,
+      "social": 63
+    },
+    "stages": [
+      {
+        "order": 0,
+        "palaceIndex": 4,
+        "palaceName": "命宫",
+        "ageRange": [
+          3,
+          12
+        ],
+        "yearRange": [
+          2002,
+          2011
+        ],
+        "stem": "壬",
+        "branch": "午",
+        "mutagen": [
+          "天梁",
+          "紫微",
+          "左辅",
+          "武曲"
+        ],
+        "narrative": "3–12 岁（2002–2011），大限行至命宫，正是懵懂童年。这十年的重心落在「自我 · 天赋 · 主轴」，自我重塑是主课题。天梁化禄带来机会与资源，宜主动把握；紫微化权让你更想主导，行动力上扬；左辅化科添名声与贵人，逢凶化吉；武曲化忌则提醒你在相关事务上多用心、少纠结。认清自己的主轴，比羡慕别人的剧本更重要。",
+        "theme": "自我重塑"
+      },
+      {
+        "order": 1,
+        "palaceIndex": 3,
+        "palaceName": "兄弟",
+        "ageRange": [
+          13,
+          22
+        ],
+        "yearRange": [
+          2012,
+          2021
+        ],
+        "stem": "辛",
+        "branch": "巳",
+        "mutagen": [
+          "巨门",
+          "太阳",
+          "文曲",
+          "文昌"
+        ],
+        "narrative": "13–22 岁（2012–2021），大限行至兄弟，正是鲜衣怒马的青春。这十年的重心落在「手足 · 同辈 · 知己」，同辈协作是主课题。巨门化禄带来机会与资源，宜主动把握；太阳化权让你更想主导，行动力上扬；文曲化科添名声与贵人，逢凶化吉；文昌化忌则提醒你在相关事务上多用心、少纠结。同辈是镜子，也是后盾，值得用心经营。",
+        "theme": "同辈协作"
+      },
+      {
+        "order": 2,
+        "palaceIndex": 2,
+        "palaceName": "夫妻",
+        "ageRange": [
+          23,
+          32
+        ],
+        "yearRange": [
+          2022,
+          2031
+        ],
+        "stem": "庚",
+        "branch": "辰",
+        "mutagen": [
+          "太阳",
+          "武曲",
+          "太阴",
+          "天同"
+        ],
+        "narrative": "23–32 岁（2022–2031），大限行至夫妻，正是立业成家的关键十年。这十年的重心落在「感情 · 婚姻 · 亲密」，亲密关系是主课题。太阳化禄带来机会与资源，宜主动把握；武曲化权让你更想主导，行动力上扬；太阴化科添名声与贵人，逢凶化吉；天同化忌则提醒你在相关事务上多用心、少纠结。亲密关系里，先做自己，再成为我们。",
+        "theme": "亲密关系"
+      },
+      {
+        "order": 3,
+        "palaceIndex": 1,
+        "palaceName": "子女",
+        "ageRange": [
+          33,
+          42
+        ],
+        "yearRange": [
+          2032,
+          2041
+        ],
+        "stem": "己",
+        "branch": "卯",
+        "mutagen": [
+          "武曲",
+          "贪狼",
+          "天梁",
+          "文曲"
+        ],
+        "narrative": "33–42 岁（2032–2041），大限行至子女，正是全力冲刺的黄金期。这十年的重心落在「子女 · 创作 · 下属」，创造孕育是主课题。武曲化禄带来机会与资源，宜主动把握；贪狼化权让你更想主导，行动力上扬；天梁化科添名声与贵人，逢凶化吉；文曲化忌则提醒你在相关事务上多用心、少纠结。你创造的一切，都是另一种形式的孩子。",
+        "theme": "创造孕育"
+      },
+      {
+        "order": 4,
+        "palaceIndex": 0,
+        "palaceName": "财帛",
+        "ageRange": [
+          43,
+          52
+        ],
+        "yearRange": [
+          2042,
+          2051
+        ],
+        "stem": "戊",
+        "branch": "寅",
+        "mutagen": [
+          "贪狼",
+          "太阴",
+          "右弼",
+          "天机"
+        ],
+        "narrative": "43–52 岁（2042–2051），大限行至财帛，正是沉淀与转折的中年。这十年的重心落在「金钱 · 收入 · 理财」，财富积累是主课题。贪狼化禄带来机会与资源，宜主动把握；太阴化权让你更想主导，行动力上扬；右弼化科添名声与贵人，逢凶化吉；天机化忌则提醒你在相关事务上多用心、少纠结。钱是工具不是主人，懂它才能用它。",
+        "theme": "财富积累"
+      },
+      {
+        "order": 5,
+        "palaceIndex": 11,
+        "palaceName": "疾厄",
+        "ageRange": [
+          53,
+          62
+        ],
+        "yearRange": [
+          2052,
+          2061
+        ],
+        "stem": "己",
+        "branch": "丑",
+        "mutagen": [
+          "武曲",
+          "贪狼",
+          "天梁",
+          "文曲"
+        ],
+        "narrative": "53–62 岁（2052–2061），大限行至疾厄，正是收获与传承的时节。这十年的重心落在「身体 · 体质 · 情绪」，身心调养是主课题。武曲化禄带来机会与资源，宜主动把握；贪狼化权让你更想主导，行动力上扬；天梁化科添名声与贵人，逢凶化吉；文曲化忌则提醒你在相关事务上多用心、少纠结。身体是最诚实的伙伴，别等它抗议才倾听。",
+        "theme": "身心调养"
+      },
+      {
+        "order": 6,
+        "palaceIndex": 10,
+        "palaceName": "迁移",
+        "ageRange": [
+          63,
+          72
+        ],
+        "yearRange": [
+          2062,
+          2071
+        ],
+        "stem": "戊",
+        "branch": "子",
+        "mutagen": [
+          "贪狼",
+          "太阴",
+          "右弼",
+          "天机"
+        ],
+        "narrative": "63–72 岁（2062–2071），大限行至迁移，正是从容自在的晚晴。这十年的重心落在「外出 · 际遇 · 舞台」，向外拓展是主课题。贪狼化禄带来机会与资源，宜主动把握；太阴化权让你更想主导，行动力上扬；右弼化科添名声与贵人，逢凶化吉；天机化忌则提醒你在相关事务上多用心、少纠结。世界很大，你的舞台未必在出生地。",
+        "theme": "向外拓展"
+      },
+      {
+        "order": 7,
+        "palaceIndex": 9,
+        "palaceName": "仆役",
+        "ageRange": [
+          73,
+          82
+        ],
+        "yearRange": [
+          2072,
+          2081
+        ],
+        "stem": "丁",
+        "branch": "亥",
+        "mutagen": [
+          "太阴",
+          "天同",
+          "天机",
+          "巨门"
+        ],
+        "narrative": "73–82 岁（2072–2081），大限行至仆役，正是从容自在的晚晴。这十年的重心落在「人际 · 朋友 · 众生」，人际网络是主课题。太阴化禄带来机会与资源，宜主动把握；天同化权让你更想主导，行动力上扬；天机化科添名声与贵人，逢凶化吉；巨门化忌则提醒你在相关事务上多用心、少纠结。人群缘是资源，但真心比数量值钱。",
+        "theme": "人际网络"
+      },
+      {
+        "order": 8,
+        "palaceIndex": 8,
+        "palaceName": "官禄",
+        "ageRange": [
+          83,
+          92
+        ],
+        "yearRange": [
+          2082,
+          2091
+        ],
+        "stem": "丙",
+        "branch": "戌",
+        "mutagen": [
+          "天同",
+          "天机",
+          "文昌",
+          "廉贞"
+        ],
+        "narrative": "83–92 岁（2082–2091），大限行至官禄，正是从容自在的晚晴。这十年的重心落在「事业 · 学业 · 志业」，事业进阶是主课题。天同化禄带来机会与资源，宜主动把握；天机化权让你更想主导，行动力上扬；文昌化科添名声与贵人，逢凶化吉；廉贞化忌则提醒你在相关事务上多用心、少纠结。把力气使在天赋上，努力才不白费。",
+        "theme": "事业进阶"
+      },
+      {
+        "order": 9,
+        "palaceIndex": 7,
+        "palaceName": "田宅",
+        "ageRange": [
+          93,
+          102
+        ],
+        "yearRange": [
+          2092,
+          2101
+        ],
+        "stem": "乙",
+        "branch": "酉",
+        "mutagen": [
+          "天机",
+          "天梁",
+          "紫微",
+          "太阴"
+        ],
+        "narrative": "93–102 岁（2092–2101），大限行至田宅，正是从容自在的晚晴。这十年的重心落在「家庭 · 不动产 · 根基」，根基置业是主课题。天机化禄带来机会与资源，宜主动把握；天梁化权让你更想主导，行动力上扬；紫微化科添名声与贵人，逢凶化吉；太阴化忌则提醒你在相关事务上多用心、少纠结。根基稳了，枝叶才能放肆生长。",
+        "theme": "根基置业"
+      },
+      {
+        "order": 10,
+        "palaceIndex": 6,
+        "palaceName": "福德",
+        "ageRange": [
+          103,
+          112
+        ],
+        "yearRange": [
+          2102,
+          2111
+        ],
+        "stem": "甲",
+        "branch": "申",
+        "mutagen": [
+          "廉贞",
+          "破军",
+          "武曲",
+          "太阳"
+        ],
+        "narrative": "103–112 岁（2102–2111），大限行至福德，正是从容自在的晚晴。这十年的重心落在「精神 · 福报 · 享受」，精神丰盈是主课题。廉贞化禄带来机会与资源，宜主动把握；破军化权让你更想主导，行动力上扬；武曲化科添名声与贵人，逢凶化吉；太阳化忌则提醒你在相关事务上多用心、少纠结。会让自己快乐，是一种被低估的能力。",
+        "theme": "精神丰盈"
+      },
+      {
+        "order": 11,
+        "palaceIndex": 5,
+        "palaceName": "父母",
+        "ageRange": [
+          113,
+          122
+        ],
+        "yearRange": [
+          2112,
+          2121
+        ],
+        "stem": "癸",
+        "branch": "未",
+        "mutagen": [
+          "破军",
+          "巨门",
+          "太阴",
+          "贪狼"
+        ],
+        "narrative": "113–122 岁（2112–2121），大限行至父母，正是从容自在的晚晴。这十年的重心落在「父母 · 长辈 · 上司」，长辈缘分是主课题。破军化禄带来机会与资源，宜主动把握；巨门化权让你更想主导，行动力上扬；太阴化科添名声与贵人，逢凶化吉；贪狼化忌则提醒你在相关事务上多用心、少纠结。理解来处，是为了更好地走向去处。",
+        "theme": "长辈缘分"
+      }
+    ],
+    "archetype": "天生的主角",
+    "verse": "紫微端坐北辰中，众星拱之自从容。",
+    "createdAt": 1794829405621
+  },
+  "source": "local"
+}

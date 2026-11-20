@@ -1,0 +1,11 @@
+{
+  "ok": false,
+  "source": "local",
+  "error": {
+    "code": "UNSUPPORTED_YEAR",
+    "message": "输入校验未通过，请检查标红字段。",
+    "fields": {
+      "year": "年份须在 1900–2100 之间"
+    }
+  }
+}

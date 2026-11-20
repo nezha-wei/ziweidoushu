@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "data": [
+    {
+      "id": "2000-08-16-2-female-split-forward-normal-1-1",
+      "solarDate": "2000-08-16",
+      "lunarDate": "二〇〇〇年七月十七",
+      "genderLabel": "女",
+      "soulBranch": "午",
+      "archetype": "天生的主角",
+      "nickname": "示例星旅人",
+      "createdAt": 1794829405621
+    }
+  ],
+  "source": "local"
+}

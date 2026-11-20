@@ -1,0 +1,119 @@
+/**
+ * 设计令牌 · 紫微斗数「纸墨编辑 × 奶金国风」体系
+ * 主色 family：纸白 / 奶金（大面积背景与插画底）
+ * 主 accent：纯黑 monochrome（编辑排版式实心按钮与索引）
+ * 星曜语义色：朱砂（主星）/ 紫（吉星）/ 蓝（煞星）/ 鎏金（点缀）
+ * 四化语义色与 src/engine/sihua.ts MUTAGEN_COLOR 严格一致。
+ */
+:root {
+  /* 纸面 family */
+  --bg-page: #ffffff;
+  --bg-1: #f5f5f5;
+  --bg-2: #ebebeb;
+  --bg-input: #fafaf8;
+  --cream: #f7f1e3;
+  --cream-2: #f1e8d2;
+  --overlay: rgba(255, 255, 255, 0.96);
+  --scrim: rgba(13, 13, 11, 0.32);
+
+  /* 墨色文字层级 */
+  --tx-0: #0d0d0b;
+  --tx-1: #1a1a18;
+  --tx-2: #4a4a45;
+  --tx-3: #6e6e66;
+  --mute: #6b6b6b;
+  --dim: #bbbbbb;
+  --faint: #d4d4d4;
+  --index: #b0b0b0;
+
+  /* 线与描边 */
+  --line: #ececec;
+  --line-2: #f0f0f0;
+  --line-3: #dddddd;
+  --bdr: rgba(0, 0, 0, 0.07);
+  --bdr-2: rgba(0, 0, 0, 0.11);
+  --bdr-3: rgba(0, 0, 0, 0.18);
+  --chart-bdr: rgba(0, 0, 0, 0.28);
+
+  /* 主 accent：纯黑 */
+  --ac: #000000;
+  --ac-tx: #ffffff;
+
+  /* 星曜语义色 */
+  --cinnabar: #a83228;   /* 朱砂 · 主星 / 命宫 */
+  --ziwei: #6e3da5;      /* 紫 · 吉星 */
+  --azure: #1a56a8;      /* 蓝 · 煞星 */
+  --gold: #c8a03a;       /* 鎏金 */
+  --jade: #2d7a4a;       /* 绿 · 禄 / 大限 */
+
+  /* 五行 */
+  --el-wood: #4a7a4f;
+  --el-fire: #a8503a;
+  --el-earth: #8b5a2b;
+  --el-metal: #c8a03a;
+  --el-water: #2f5a82;
+
+  /* 四化语义色（与 src/engine/sihua.ts 一致） */
+  --lu: #2d7a4a;
+  --quan: #1a56a8;
+  --ke: #8a7018;
+  --ji: #a83228;
+
+  /* 时间层色 */
+  --t-decadal: #228b22;
+  --t-year: #0b79ec;
+  --t-month: #ff8000;
+  --t-day: #822dc8;
+  --t-hour: #18a2a3;
+
+  /* 语义色 */
+  --success: #2d7a4a;
+  --info: #1c63ce;
+  --warn: #8a5a00;
+  --danger: #b3195a;
+
+  /* 命 / 身宫高亮 */
+  --soul-bg: rgba(168, 50, 40, 0.14);
+  --soul-bdr: rgba(168, 50, 40, 0.35);
+  --body-bg: rgba(168, 50, 40, 0.08);
+  --body-bdr: rgba(168, 50, 40, 0.25);
+
+  /* 渐变（跨真实色相：奶金 → 朱砂 → 紫） */
+  --grad-cream: linear-gradient(160deg, #fbf7ec 0%, #f3ead6 100%);
+  --grad-gold: linear-gradient(120deg, #e8c96a 0%, #c8a03a 100%);
+  --grad-brand: linear-gradient(120deg, #c8a03a 0%, #a8503a 52%, #6e3da5 100%);
+  --grad-scrim: linear-gradient(180deg, rgba(13, 13, 11, 0) 34%, rgba(13, 13, 11, 0.78) 100%);
+
+  /* 字体（系统字体栈，无外部字体资源） */
+  --font-display: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --font-serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
+
+  /* 圆角体系：海报极锐利 / 表单大圆角 */
+  --r-card: 2px;
+  --r-img: 6px;
+  --r-box: 8px;
+  --r-modal: 12px;
+  --r-pill: 999px;
+  --r-form: 24px;
+  --r-input: 14px;
+
+  /* 阴影（极轻编辑感） */
+  --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --sh-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --sh-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+  --sh-form: 0 14px 38px rgba(43, 38, 32, 0.09), 0 2px 8px rgba(43, 38, 32, 0.05);
+
+  /* 尺寸与节奏 */
+  --nav-h: 64px;
+  --max-w: 1240px;
+  --gap: 22px;
+
+  /* 动效时长与缓动 */
+  --dur-fast: 0.18s;
+  --dur: 0.32s;
+  --dur-slow: 0.6s;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

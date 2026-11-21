@@ -111,6 +111,36 @@ export function verseOf(chart: Chart): string {
   return '命由星写，路由己走。';
 }
 
+const QUICK_TRAITS: Record<string, { summary: string; tags: string[] }> = {
+  紫微: { summary: '关键时刻拿得定主意，也愿意替团队扛事', tags: ['有主见', '能组织', '重体面'] },
+  天机: { summary: '习惯先想明白再行动，总能找到另一种解法', tags: ['点子多', '善观察', '爱思考'] },
+  太阳: { summary: '愿意主动照顾别人，常常是带动气氛的那个人', tags: ['有热情', '乐分享', '有担当'] },
+  武曲: { summary: '比起空谈更喜欢动手，用看得见的结果表达自己', tags: ['行动派', '重效率', '有韧劲'] },
+  天同: { summary: '懂得把日子过得舒服，也让身边的人放松下来', tags: ['松弛感', '好相处', '会生活'] },
+  廉贞: { summary: '既有自己的原则，也擅长在人与人之间找到平衡', tags: ['有个性', '懂分寸', '很投入'] },
+  天府: { summary: '做事稳妥，喜欢把生活和手里的资源安排得井井有条', tags: ['稳得住', '会统筹', '重安全感'] },
+  太阴: { summary: '留意别人忽略的小细节，在安静中积蓄自己的力量', tags: ['细腻', '有审美', '慢热认真'] },
+  贪狼: { summary: '对新鲜事充满好奇，能把兴趣变成自己的独特表达', tags: ['好奇心', '多才多艺', '会交朋友'] },
+  巨门: { summary: '喜欢问清为什么，常能把复杂的问题讲明白', tags: ['会表达', '爱钻研', '有洞察'] },
+  天相: { summary: '在意承诺与公平，擅长让一群人一起把事情做好', tags: ['可靠', '会协调', '讲公平'] },
+  天梁: { summary: '遇事有自己的原则，习惯替身边的人多想一步', tags: ['有原则', '会照顾人', '沉得住气'] },
+  七杀: { summary: '面对挑战更愿意自己试一试，不喜欢被别人安排', tags: ['很独立', '有决断', '敢挑战'] },
+  破军: { summary: '不满足于照旧，愿意拆掉旧办法再创造新的可能', tags: ['敢尝试', '能破局', '爱变化'] },
+};
+
+export function quickReading(chart: Chart): { summary: string; tags: string[]; basis: string } {
+  const soul = chart.palaces[chart.soulIndex];
+  const borrowed = soul.majorStars.length === 0;
+  const stars = borrowed ? chart.palaces[(soul.index + 6) % 12].majorStars : soul.majorStars;
+  const traits = stars.map((star) => QUICK_TRAITS[star.name]).filter(Boolean);
+  const tags = [...new Set([0, 1, 2].flatMap((index) => traits.map((trait) => trait.tags[index])))].slice(0, 3);
+  return {
+    summary: traits.length ? `${traits.map((trait) => trait.summary).join('；')}。` : '不必用一种标签定义自己，在不同的经历里发现自己的节奏。',
+    tags: tags.length === 3 ? tags : ['有弹性', '善适应', '自在探索'],
+    basis: `${borrowed ? '命宫无主星，参考对宫' : '参考命宫'}：${stars.map((star) => star.name).join('、') || '无主星'} · 本地规则解读`,
+  };
+}
+
 const LIFE_PHASE: [number, string][] = [
   [12, '懵懂童年'], [22, '鲜衣怒马的青春'], [32, '立业成家的关键十年'],
   [42, '全力冲刺的黄金期'], [52, '沉淀与转折的中年'], [62, '收获与传承的时节'], [200, '从容自在的晚晴'],

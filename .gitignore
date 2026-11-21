@@ -8,3 +8,7 @@ image/
 .DS_Store
 scripts/_*-bundle.mjs
 scripts/_t.mjs
+.qoder/
+*.qoder.site
+.env
+.env.*

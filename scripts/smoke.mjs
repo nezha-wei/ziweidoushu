@@ -13,6 +13,7 @@ buildSync({
   stdin: {
     contents: `
       export { computeChart, SAMPLE_INPUT, palaceFlights, surroundedIndices } from '../src/engine/ziwei';
+      export { quickReading } from '../src/engine/interpret';
     `,
     resolveDir: path.join(root, 'scripts'),
     loader: 'ts',
@@ -23,7 +24,7 @@ buildSync({
   outfile: out,
   logLevel: 'silent',
 });
-const { computeChart, SAMPLE_INPUT, palaceFlights, surroundedIndices } = await import(pathToFileURL(out).href);
+const { computeChart, SAMPLE_INPUT, palaceFlights, surroundedIndices, quickReading } = await import(pathToFileURL(out).href);
 fs.unlinkSync(out);
 
 let fail = 0;
@@ -65,6 +66,22 @@ const nc = computeChart({ ...night, ziHourPolicy: 'current' });
 ok('晚子时口径影响日柱时柱', nf.data.ganzhi !== nc.data.ganzhi, `${nf.data.ganzhi} vs ${nc.data.ganzhi}`);
 const noTrue = computeChart({ ...SAMPLE_INPUT, useTrueSolarTime: false });
 ok('真太阳时开关影响校正', noTrue.data.correction.trueSolarApplied === false && c.correction.trueSolarApplied === true);
+
+const reading = quickReading(c);
+ok('白话解读包含三个唯一关键词', reading.tags.length === 3 && new Set(reading.tags).size === 3);
+ok('白话解读同盘确定且说明规则来源', JSON.stringify(quickReading(c)) === JSON.stringify(reading) && reading.basis.includes('本地规则'));
+const fixture = JSON.parse(JSON.stringify(c));
+fixture.palaces[fixture.soulIndex].majorStars = [{ name: '天机' }];
+ok('单星白话解读对应主星', quickReading(fixture).summary.includes('另一种解法') && quickReading(fixture).tags.includes('点子多'));
+fixture.palaces[fixture.soulIndex].majorStars.push({ name: '太阴' });
+const multi = quickReading(fixture);
+ok('双星白话解读兼顾两颗星', multi.summary.includes('另一种解法') && multi.summary.includes('小细节') && multi.tags.includes('细腻') && multi.tags.length === 3);
+fixture.palaces[fixture.soulIndex].majorStars = [];
+fixture.palaces[(fixture.soulIndex + 6) % 12].majorStars = [{ name: '天机' }];
+const borrowed = quickReading(fixture);
+ok('空宫明确标注参考对宫', borrowed.basis.includes('命宫无主星，参考对宫') && borrowed.tags.includes('点子多'));
+fixture.palaces[(fixture.soulIndex + 6) % 12].majorStars = [];
+ok('无可用主星安全回退', quickReading(fixture).tags.length === 3 && quickReading(fixture).summary.includes('自己的节奏'));
 
 console.log(fail ? `\n${fail} 项失败` : '\n引擎 smoke 全部通过');
 process.exit(fail ? 1 : 0);

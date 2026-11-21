@@ -9,7 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const EDGE = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const URL = 'http://localhost:4173/';
+const URL = process.env.TEST_URL || 'http://localhost:4173/';
 const SHOTS = path.resolve('shots');
 const DL = path.resolve('shots', 'downloads');
 fs.mkdirSync(SHOTS, { recursive: true });
@@ -97,6 +97,8 @@ const browser = await puppeteer.launch({ executablePath: EDGE, headless: 'new', 
   ok('D3 提交起盘罗盘渲染', await page.$('.compass-svg .sector') !== null);
   await shot(page, 'vd2-chart');
 
+  await page.evaluate(() => document.querySelector('.compass-wrap').scrollIntoView({ behavior: 'instant', block: 'center' }));
+  await sleep(300);
   const a0 = await rotorAngle(page);
   const box = await page.$eval('.compass-svg', (e) => { const r = e.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
   const sx = box.x + box.w / 2 + box.w * 0.35, sy = box.y + box.h / 2;

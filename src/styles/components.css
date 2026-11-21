@@ -31,15 +31,38 @@
 
 /* ---- 卡片 ---- */
 .card {
-  background: var(--bg-page);
-  border: 1px solid var(--bdr);
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
   border-radius: var(--r-box);
-  padding: 22px;
+  padding: calc(22px * var(--site-space));
   box-shadow: var(--sh-sm);
 }
 .card-title { font-size: 1.04rem; color: var(--tx-0); letter-spacing: 0.1em; margin-bottom: 14px; }
 .card-title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .card-title-row .card-title { margin-bottom: 10px; }
+
+.quick-reading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  align-items: center;
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+  border-left: 3px solid var(--gold);
+}
+.quick-reading[hidden] { display: none; }
+.reading-copy { min-width: 0; }
+.reading-label { color: var(--tx-3); font-size: 0.8rem; }
+.reading-title { margin: 8px 0; color: var(--cinnabar); font-size: calc(1.5rem * var(--site-type)); }
+.reading-summary { color: var(--tx-2); max-width: 680px; }
+.reading-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.reading-tag { padding: 3px 12px; background: var(--cream); border-radius: var(--r-pill); font-size: 0.86rem; color: var(--tx-1); }
+.reading-basis { margin: 0; font-size: 0.78rem; color: var(--tx-3); }
+.reading-actions { display: grid; gap: 12px; }
+.reading-actions small { font-size: 0.75rem; color: var(--tx-3); text-align: center; }
+@media (max-width: 640px) {
+  .quick-reading { grid-template-columns: 1fr; }
+  .reading-actions .btn { width: 100%; }
+}
 
 /* ---- 起盘表单（split 表单卡） ---- */
 .cast-card { border-radius: var(--r-form); box-shadow: var(--sh-form); padding: 28px; }
@@ -707,6 +730,7 @@ body.drawer-open { overflow: hidden; }
 .tl-empty { padding: 30px; text-align: center; border: 1px dashed var(--line-3); border-radius: var(--r-box); color: var(--tx-2); display: grid; gap: 14px; justify-items: center; }
 
 /* ---- 星卡 ---- */
+.share-side .tgl { margin-top: 16px; }
 .share-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 8px; }
 .share-status { color: var(--jade); font-size: 0.88rem; min-height: 1.5em; margin: 0; }
 .share-note { margin-top: 10px; }
@@ -746,7 +770,7 @@ body.drawer-open { overflow: hidden; }
 @media (max-width: 640px) {
   .form-row { grid-template-columns: 1fr; }
   .form-date { grid-template-columns: 1fr 1fr 1fr; }
-  .card { padding: 17px; }
+  .card { padding: calc(17px * var(--site-space)); }
   .cast-card { padding: 20px; }
   .ctrl-toggles { grid-template-columns: 1fr 1fr; }
   .tl-detail-card { padding: 19px; }

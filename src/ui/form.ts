@@ -11,7 +11,7 @@ import { listHistory, getChart, removeChart } from '../services/api';
 import { sTap } from '../services/sound';
 
 function patch(p: Partial<BirthInput>): void {
-  setState({ input: { ...getState().input, ...p }, isSample: false });
+  setState({ input: { ...getState().input, ...p } });
 }
 
 function pad(n: number): string {

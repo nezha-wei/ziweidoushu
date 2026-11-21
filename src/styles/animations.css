@@ -31,7 +31,7 @@
 /* 刊头分级入场序列 */
 .anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .anim-6 {
   opacity: 0;
-  animation: rise-in 0.85s var(--ease) forwards;
+  animation: rise-in calc(0.85s * var(--site-motion)) var(--ease) forwards;
 }
 .anim-1 { animation-delay: 0.05s; }
 .anim-2 { animation-delay: 0.18s; }

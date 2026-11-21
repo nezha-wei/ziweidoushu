@@ -19,6 +19,8 @@ import { mountDrawer } from './drawer';
 import { mountTimeline } from './timeline';
 import { mountShare } from './share';
 import { mountAbout } from './about';
+import { SAMPLE_INPUT } from '../engine/ziwei';
+import { quickReading } from '../engine/interpret';
 
 const delay = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -30,7 +32,7 @@ export function mountApp(root: HTMLElement): void {
   unlockAudio();
 
   const nav = mountNav();
-  const hero = mountHero();
+  const hero = mountHero(() => runCompute(true, true));
   const compass = mountCompass();
   const controls = mountControls(compass.resetView, compass.setAngle);
   const board = mountBoard();
@@ -58,12 +60,41 @@ export function mountApp(root: HTMLElement): void {
     metaRow,
     correctionBox,
   );
+  const readingLabel = h('span', { class: 'reading-label' });
+  const readingTitle = h('h3', { class: 'reading-title' });
+  const readingSummary = h('p', { class: 'reading-summary' });
+  const readingTags = h('div', { class: 'reading-tags', 'aria-label': '三个性格关键词' });
+  const readingBasis = h('p', { class: 'reading-basis' });
+  const readingCard = h('div', { class: 'card quick-reading', 'aria-label': '白话解读' },
+    h('div', { class: 'reading-copy', 'aria-live': 'polite', 'aria-atomic': 'true' },
+      readingLabel, readingTitle, readingSummary, readingTags, readingBasis,
+    ),
+    h('div', { class: 'reading-actions' },
+      h('a', { href: '#share', class: 'btn btn-primary', text: '带走我的星卡' }),
+      h('small', { text: '趣味解读，不是性格测评或人生预测。' }),
+    ),
+  );
+  let readingKey = '';
+  function updateReading(st: AppState): void {
+    readingCard.hidden = !st.chart;
+    if (!st.chart) return;
+    const key = `${st.chart.id}|${st.isSample}|${st.status}`;
+    if (key === readingKey) return;
+    readingKey = key;
+    const reading = quickReading(st.chart);
+    readingLabel.textContent = st.status === 'error' ? '输入有误 · 以下保留上一次结果' : st.isSample ? '示例体验 · 非你的个人结果' : '你的星盘 · 白话版';
+    readingTitle.textContent = st.chart.archetype;
+    readingSummary.textContent = reading.summary;
+    readingTags.replaceChildren(...reading.tags.map((tag) => h('span', { class: 'reading-tag', text: tag })));
+    readingBasis.textContent = reading.basis;
+  }
   const chartSection = h('section', { class: 'section chart', id: 'chart' },
     h('div', { class: 'section-head' },
       h('span', { class: 'section-no', text: '02' }),
       h('h2', { class: 'section-title', text: '命盘 · 十二宫与四化飞星' }),
       h('p', { class: 'section-sub', text: '点击宫位与星曜查看解读，宫干飞四化沿星盘流动；控制台实时调节罗盘。' }),
     ),
+    readingCard,
     h('div', { class: 'chart-workspace' },
       h('div', { class: 'chart-workspace-left' }, viewTabs, stageArea),
       h('div', { class: 'chart-workspace-right' }, insightCard, controls.el),
@@ -142,23 +173,26 @@ export function mountApp(root: HTMLElement): void {
 
   // ---- 排盘主流程 ----
   let computing = false;
-  async function runCompute(scrollToChart: boolean): Promise<void> {
+  async function runCompute(scrollToChart: boolean, sample = false): Promise<void> {
     if (computing) return;
     computing = true;
-    const input = getState().input;
+    const input = { ...(sample ? SAMPLE_INPUT : getState().input) };
     setState({ status: 'computing', error: null });
     const started = performance.now();
     const r = await api.compute(input);
     const elapsed = performance.now() - started;
-    if (elapsed < 700) await delay(700 - elapsed); // 保证加载动画可感知
+    if (!sample && elapsed < 300) await delay(300 - elapsed);
     computing = false;
     if (r.ok && r.data) {
       setState({
-        chart: r.data, status: 'ready', error: null,
+        chart: r.data, input, status: 'ready', error: null, isSample: sample,
         selectedPalace: null, selectedStar: null, drawerOpen: false, activeStage: 0,
       });
-      sCompute();
-      api.saveChart(r.data).then(() => { form.refreshHistory(); hero.refreshCta(); });
+      if (!sample) {
+        sCompute();
+        await api.saveChart(r.data);
+        form.refreshHistory();
+      }
       if (scrollToChart) {
         document.getElementById('chart')?.scrollIntoView({ behavior: 'smooth' });
       }
@@ -173,6 +207,7 @@ export function mountApp(root: HTMLElement): void {
     hero.update();
     form.update();
     updateMeta(st);
+    updateReading(st);
     updateView(st);
     compass.update(st);
     controls.update(st);
@@ -184,6 +219,7 @@ export function mountApp(root: HTMLElement): void {
   });
   const st0 = getState();
   updateMeta(st0);
+  updateReading(st0);
   updateView(st0);
 
   // ---- 滚动入场（无 IntersectionObserver 时优雅降级为直接显示） ----
@@ -206,5 +242,5 @@ export function mountApp(root: HTMLElement): void {
   }
 
   // 首屏即有真实内容：静默加载示例盘
-  runCompute(false);
+  runCompute(false, true);
 }

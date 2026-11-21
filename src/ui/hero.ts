@@ -1,15 +1,8 @@
-/**
- * 首屏：编辑刊头（日期徽章 + 巨字标题与星徽 + 十四主星伙伴行 + 数据行）
- * + 古籍轮播（带进度刻度）+ 「继续推演」CTA 大卡 + 视图快捷切换
- * + 居中海报竖廊（六张奶金国风工笔插画入口卡，锚向各分区）。
- * 入场为编排过的分级序列（见 animations.css）。
- */
 import { h } from './dom';
 import { Solar } from 'lunar-javascript';
 import { CLASSICS } from '../content/classics';
 import { MAJOR_STARS } from '../content/stars';
 import { getState, setState } from '../services/store';
-import { listHistory, getChart } from '../services/api';
 import { sTap } from '../services/sound';
 
 /** 五行 → 伙伴头像底色（与 tokens 五行色一致，白字） */
@@ -27,7 +20,7 @@ const POSTERS: { no: string; img: string; cn: string; en: string; desc: string; 
   { no: '06', img: 'posters/classics.png', cn: '古籍书院', en: 'CLASSICS', desc: '紫微斗数全书等古籍原文与白话提示。', href: '#about' },
 ];
 
-export function mountHero(): { el: HTMLElement; update: () => void; refreshCta: () => void } {
+export function mountHero(onSample: () => void): { el: HTMLElement; update: () => void } {
   // ---- 今日日期徽章（公历 + 农历干支） ----
   const now = new Date();
   const lunar = Solar.fromYmdHms(now.getFullYear(), now.getMonth() + 1, now.getDate(), 12, 0, 0).getLunar();
@@ -78,45 +71,11 @@ export function mountHero(): { el: HTMLElement; update: () => void; refreshCta: 
     }),
   );
 
-  // ---- CTA 大卡：有历史则「继续推演」，否则「开始起盘」 ----
-  const ctaTitle = h('strong', { class: 'hero-cta-title', text: '开始起盘' });
-  const ctaSub = h('span', { class: 'hero-cta-sub', text: '正在加载示例星盘…' });
-  let resumeId = '';
-  const cta = h('a', { class: 'hero-cta-card anim-5', href: '#cast' }, ctaTitle, ctaSub);
-  cta.addEventListener('click', async (e) => {
-    sTap();
-    if (!resumeId) return; // 无历史：走默认锚点跳到起盘表单
-    e.preventDefault();
-    const r = await getChart(resumeId);
-    if (r.ok && r.data) {
-      setState({
-        chart: r.data, input: { ...r.data.input }, status: 'ready', error: null, isSample: false,
-        selectedPalace: null, selectedStar: null, drawerOpen: false, activeStage: 0,
-      });
-      document.getElementById('chart')?.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-
-  async function refreshCta(): Promise<void> {
-    const r = await listHistory();
-    const items = r.data ?? [];
-    const s = getState();
-    if (items.length) {
-      resumeId = items[0].id;
-      ctaTitle.textContent = '继续推演';
-      ctaSub.textContent = `已收录 ${items.length} 张命盘 · 最近「${items[0].nickname || items[0].archetype}」· 命宫${items[0].soulBranch}`;
-    } else if (s.chart && !s.isSample) {
-      resumeId = s.chart.id;
-      ctaTitle.textContent = '继续推演';
-      ctaSub.textContent = `当前命盘 · ${s.chart.solarDate} ${s.chart.timeName} · 命宫${s.chart.soulBranch} · ${s.chart.archetype}`;
-    } else {
-      resumeId = '';
-      ctaTitle.textContent = '开始起盘';
-      ctaSub.textContent = s.chart
-        ? `示例盘已就绪 · ${s.chart.solarDate} ${s.chart.timeName} · 命宫${s.chart.soulBranch} · ${s.chart.archetype}`
-        : s.status === 'error' ? '示例盘加载失败，点这里手动起盘。' : '正在加载示例星盘…';
-    }
-  }
+  const sampleBtn = h('button', { type: 'button', class: 'btn btn-primary hero-sample', text: '先看示例 · 不用填' }) as HTMLButtonElement;
+  sampleBtn.addEventListener('click', () => { sTap(); onSample(); });
+  const myChart = h('a', { class: 'btn btn-ghost hero-personal', href: '#cast', text: '测我的 · 填出生信息' });
+  myChart.addEventListener('click', () => sTap());
+  const actions = h('div', { class: 'hero-actions anim-3' }, sampleBtn, myChart);
 
   // ---- 视图快捷切换（罗盘·当前 / 方盘 / 大限 / 星卡） ----
   function go(id: string): void {
@@ -170,14 +129,15 @@ export function mountHero(): { el: HTMLElement; update: () => void; refreshCta: 
         ),
         h('span', { class: 'hero-title-sub' }, '和你的十四主星', crew),
       ),
-      h('p', { class: 'hero-lede anim-3', text: '把一千年的星象学，转成你指尖的罗盘。输入出生时刻，十二宫命盘在纸墨之间即时点亮；全部计算在浏览器本地完成，无需注册，不上传任何生辰。' }),
+      h('p', { class: 'hero-lede anim-3', text: '不懂星曜也能看懂自己的一种可能。先看一句白话解读，再转动星盘，带走你的专属星卡。' }),
+      actions,
+      h('p', { class: 'hero-hint anim-3', text: '无需登录 · 本机计算 · 分享默认隐藏生辰 · 仅供文化娱乐' }),
       h('p', { class: 'hero-stats-line anim-3' },
         h('b', { text: '紫微斗数' }), ' · 十四主星 · 十二宫位 · ',
         h('b', { text: '20' }), ' 条格局规则 · ', h('b', { text: '12' }), ' 段大限推演',
       ),
       h('div', { class: 'hero-quote anim-4 quote-in' }, quoteText, quoteSrc),
       h('div', { class: 'hero-dashes anim-4', 'aria-hidden': 'true' }, dashes),
-      cta,
       h('p', { class: 'hero-hint anim-6', text: '拖拽旋转罗盘 · 点击星曜看解读 · 命盘只存本机浏览器' }),
       h('div', { class: 'hero-modes anim-6' }, modeCompass, modeBoard, modeTimeline, modeShare),
     ),
@@ -187,20 +147,14 @@ export function mountHero(): { el: HTMLElement; update: () => void; refreshCta: 
     ),
   );
 
-  let lastKey = '';
   function update(): void {
     const s = getState();
     modeCompass.classList.toggle('on', s.viewMode === 'compass');
     modeBoard.classList.toggle('on', s.viewMode === 'board');
-    const key = `${s.chart?.id ?? ''}|${s.status}`;
-    if (key !== lastKey) {
-      lastKey = key;
-      refreshCta();
-    }
+    sampleBtn.disabled = s.status === 'computing';
   }
-  refreshCta();
   update();
-  return { el: section, update, refreshCta };
+  return { el: section, update };
 }
 
 /** 标题旁的小星徽（奶金底 + 金四芒星 + 朱砂心，呼应 favicon） */

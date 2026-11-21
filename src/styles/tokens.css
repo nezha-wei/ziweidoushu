@@ -6,8 +6,20 @@
  * 四化语义色与 src/engine/sihua.ts MUTAGEN_COLOR 严格一致。
  */
 :root {
+  --site-bg: #ffffff;
+  --site-fg: #1a1a18;
+  --site-accent: #000000;
+  --site-on-accent: #ffffff;
+  --site-surface: #ffffff;
+  --site-muted: #6e6e66;
+  --site-border: rgba(0, 0, 0, 0.11);
+  --site-font: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --site-radius: 8px;
+  --site-space: 1;
+  --site-type: 1;
+  --site-motion: 1;
   /* 纸面 family */
-  --bg-page: #ffffff;
+  --bg-page: var(--site-bg);
   --bg-1: #f5f5f5;
   --bg-2: #ebebeb;
   --bg-input: #fafaf8;
@@ -17,10 +29,10 @@
   --scrim: rgba(13, 13, 11, 0.32);
 
   /* 墨色文字层级 */
-  --tx-0: #0d0d0b;
-  --tx-1: #1a1a18;
+  --tx-0: var(--site-fg);
+  --tx-1: var(--site-fg);
   --tx-2: #4a4a45;
-  --tx-3: #6e6e66;
+  --tx-3: var(--site-muted);
   --mute: #6b6b6b;
   --dim: #bbbbbb;
   --faint: #d4d4d4;
@@ -36,8 +48,8 @@
   --chart-bdr: rgba(0, 0, 0, 0.28);
 
   /* 主 accent：纯黑 */
-  --ac: #000000;
-  --ac-tx: #ffffff;
+  --ac: var(--site-accent);
+  --ac-tx: var(--site-on-accent);
 
   /* 星曜语义色 */
   --cinnabar: #a83228;   /* 朱砂 · 主星 / 命宫 */
@@ -86,18 +98,18 @@
 
   /* 字体（系统字体栈，无外部字体资源） */
   --font-display: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--site-font);
   --font-serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Courier New", monospace;
 
   /* 圆角体系：海报极锐利 / 表单大圆角 */
-  --r-card: 2px;
-  --r-img: 6px;
-  --r-box: 8px;
-  --r-modal: 12px;
+  --r-card: calc(var(--site-radius) * 0.25);
+  --r-img: calc(var(--site-radius) * 0.75);
+  --r-box: var(--site-radius);
+  --r-modal: calc(var(--site-radius) * 1.5);
   --r-pill: 999px;
-  --r-form: 24px;
-  --r-input: 14px;
+  --r-form: calc(var(--site-radius) * 3);
+  --r-input: calc(var(--site-radius) * 1.75);
 
   /* 阴影（极轻编辑感） */
   --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -109,11 +121,11 @@
   /* 尺寸与节奏 */
   --nav-h: 64px;
   --max-w: 1240px;
-  --gap: 22px;
+  --gap: calc(22px * var(--site-space));
 
   /* 动效时长与缓动 */
-  --dur-fast: 0.18s;
-  --dur: 0.32s;
-  --dur-slow: 0.6s;
+  --dur-fast: calc(0.18s * var(--site-motion));
+  --dur: calc(0.32s * var(--site-motion));
+  --dur-slow: calc(0.6s * var(--site-motion));
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

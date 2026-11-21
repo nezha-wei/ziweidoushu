@@ -8,7 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const EDGE = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const URL = 'http://localhost:4173/';
+const URL = process.env.TEST_URL || 'http://localhost:4173/';
 const SHOTS = path.resolve('shots');
 fs.mkdirSync(SHOTS, { recursive: true });
 
@@ -79,6 +79,125 @@ const browser = await puppeteer.launch({
   args: ['--no-sandbox', '--disable-dev-shm-usage', '--autoplay-policy=no-user-gesture-required'],
 });
 await browser.defaultBrowserContext().overridePermissions(URL, ['clipboard-read', 'clipboard-write']);
+
+{
+  const context = await browser.createIncognitoBrowserContext();
+  await context.overridePermissions(URL, ['clipboard-read', 'clipboard-write']);
+  const page = await context.newPage();
+  await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+  page.on('pageerror', (e) => errors.push(`[quick-flow] ${e.message}`));
+  await page.evaluateOnNewDocument(() => {
+    window.cardText = [];
+    const fillText = CanvasRenderingContext2D.prototype.fillText;
+    CanvasRenderingContext2D.prototype.fillText = function (text, x, y, maxWidth) {
+      if (this.canvas.classList.contains('share-canvas')) {
+        window.cardText.push({ text: String(text), x, y, width: Math.min(this.measureText(text).width, maxWidth ?? Infinity), font: this.font });
+      }
+      return fillText.apply(this, arguments);
+    };
+  });
+  await page.goto(URL, { waitUntil: 'networkidle0' });
+  await waitChart(page);
+  const historyCount = () => page.evaluate(() => JSON.parse(localStorage.getItem('ziwei.orbit.history.v1') || '[]').length);
+  const privacy = 'input[aria-label="隐藏生辰信息"]';
+  const copy = '.share-actions .btn-ghost';
+  const fieldInput = async (label, value) => {
+    const selector = `input[aria-label="${label}"]`;
+    await page.focus(selector);
+    await page.click(selector, { clickCount: 3 });
+    await page.keyboard.press('Backspace');
+    await page.type(selector, value);
+  };
+  const cardTexts = () => page.evaluate(() => window.cardText.map((x) => x.text).join('\n'));
+  ok('快速体验·首次访问不保存示例', await historyCount() === 0);
+  ok('快速体验·示例标签明确', await page.$eval('.reading-label', (e) => e.textContent.includes('非你的个人结果')));
+  ok('快速体验·两入口首屏可达', await page.$$eval('.hero-actions .btn', (els) => els.length === 2 && els.every((el) => el.getBoundingClientRect().bottom < innerHeight)));
+  ok('快速体验·默认星卡不绘制生辰', !(await cardTexts()).includes('2000-08-16') && !(await cardTexts()).includes('庚辰 甲申'));
+  await page.click('.hero-sample');
+  await sleep(1000);
+  ok('快速体验·示例直达白话结果', await page.$eval('.quick-reading', (e) => { const r = e.getBoundingClientRect(); return r.top > 0 && r.top < innerHeight; }));
+  ok('快速体验·重复示例仍不污染历史', await historyCount() === 0);
+  ok('快速体验·三个唯一标签', await page.$$eval('.reading-tag', (els) => els.length === 3 && new Set(els.map((el) => el.textContent)).size === 3));
+  const sampleSummary = await page.$eval('.reading-summary', (e) => e.textContent);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page.click('.hero-personal');
+  await sleep(1000);
+  await fieldInput('出生年份', '1995');
+  await fieldInput('出生月份', '10');
+  await fieldInput('出生日期', '1');
+  await page.select('select[aria-label="出生小时"]', '6');
+  await fieldInput('昵称', '测试旅人');
+  ok('快速体验·改草稿不冒充新结果', await page.$eval('.reading-label', (e) => e.textContent.includes('非你的个人结果')));
+  await page.click('.cast-submit');
+  await sleep(1200);
+  ok('快速体验·个人结果与历史落地', await historyCount() === 1 && await page.$eval('.reading-label', (e) => e.textContent === '你的星盘 · 白话版'));
+  ok('快速体验·同主星采用一致规则解读', await page.$eval('.reading-summary', (e) => e.textContent) === sampleSummary);
+  await page.click('.reading-actions .btn');
+  await sleep(1000);
+  ok('隐私·新盘默认隐藏', await page.$eval(privacy, (e) => e.checked));
+  await page.evaluate(() => { window.cardText = []; });
+  await fieldInput('星卡署名', '测试昵称十六个汉字完整显示检查');
+  await page.click(copy);
+  await page.waitForFunction(() => document.querySelector('.share-status').textContent.includes('已复制'));
+  const hiddenCopy = await page.evaluate(() => navigator.clipboard.readText());
+  ok('隐私·真实剪贴板默认无生辰', !hiddenCopy.includes('1995-10-01') && !hiddenCopy.includes('干支：') && hiddenCopy.includes('关键词：'));
+  ok('隐私·真实画布默认无生辰', !(await cardTexts()).includes('1995-10-01') && (await cardTexts()).includes('已隐藏生辰信息'));
+  ok('排版·长昵称与原型不越画布', await page.evaluate(() => window.cardText.filter((x) => x.y === 260 || x.y === 390).every((x) => x.x + x.width <= 1008.5)));
+  ok('排版·摘要避开印章和页脚', await page.evaluate(() => window.cardText.filter((x) => x.x === 200 && x.y >= 1080).every((x) => x.x + x.width <= 892.5 && x.y < 1344)));
+  await shot(page, 'quick-private-mobile');
+  await page.$eval(privacy, (e) => e.closest('label').scrollIntoView({ behavior: 'instant', block: 'center' }));
+  await page.click('#share .tgl');
+  ok('隐私·切换清除过期状态', await page.$eval('.share-status', (e) => e.textContent === ''));
+  await page.evaluate(() => { window.cardText = []; });
+  await page.click(copy);
+  await page.waitForFunction(() => document.querySelector('.share-status').textContent.includes('已复制'));
+  ok('隐私·主动公开才包含日期', (await page.evaluate(() => navigator.clipboard.readText())).includes('1995-10-01') && (await cardTexts()).includes('1995-10-01'));
+  await scrollTo(page, 'cast');
+  await fieldInput('出生日期', '2');
+  await page.click('.cast-submit');
+  await sleep(1200);
+  ok('隐私·换盘恢复隐藏', await page.$eval(privacy, (e) => e.checked));
+  ok('快速体验·不同主星更新解读与依据', await page.$eval('.reading-summary', (e) => e.textContent) !== sampleSummary && await page.$eval('.reading-basis', (e) => e.textContent.includes('天梁')));
+  await scrollTo(page, 'cast');
+  await fieldInput('出生日期', '16');
+  await page.evaluate(() => { window.cardText = []; });
+  await page.click('.cast-submit');
+  await sleep(1200);
+  ok('排版·双主星长标题真实绘制且不越界', await page.evaluate(() => window.cardText.some((x) => x.y === 390 && x.text.includes('×') && x.x + x.width <= 1008.5)));
+  const doubleCard = await page.$eval('.share-canvas', (e) => e.toDataURL('image/png'));
+  fs.writeFileSync(path.join(SHOTS, 'quick-double-private.png'), Buffer.from(doubleCard.split(',')[1], 'base64'));
+  await page.reload({ waitUntil: 'networkidle0' });
+  await waitChart(page);
+  ok('快速体验·刷新不新增示例历史', await historyCount() === 3);
+  await scrollTo(page, 'cast');
+  await fieldInput('出生年份', '1800');
+  await page.click('.cast-submit');
+  await sleep(800);
+  ok('快速体验·错误后保留旧结果并标注', await page.$eval('.reading-label', (e) => e.textContent.includes('保留上一次结果')));
+  await scrollTo(page, 'share');
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined });
+    document.execCommand = () => false;
+  });
+  await page.click(copy);
+  await page.waitForFunction(() => document.querySelector('.share-status').textContent.includes('复制失败'));
+  ok('隐私·复制失败不虚报成功', await page.$eval('.share-status', (e) => !e.textContent.includes('已复制')));
+  const nudge = await page.evaluate(() => {
+    const vars = { '--site-bg': '#fafafa', '--site-fg': '#123456', '--site-accent': '#654321', '--site-on-accent': '#ffffee', '--site-surface': '#eeeedd', '--site-muted': '#334455', '--site-border': '#abcdef', '--site-font': 'monospace', '--site-radius': '18px', '--site-space': '1.2', '--site-type': '1.2', '--site-motion': '2' };
+    Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+    const body = getComputedStyle(document.body), card = getComputedStyle(document.querySelector('.quick-reading')), title = getComputedStyle(document.querySelector('.reading-title'));
+    return { color: body.color, bg: body.backgroundColor, font: body.fontFamily, surface: card.backgroundColor, border: card.borderTopColor, radius: card.borderRadius, padding: card.paddingTop, title: title.fontSize, transition: getComputedStyle(document.querySelector('.btn-primary')).transitionDuration };
+  });
+  ok('工作台·颜色字体真实消费', nudge.color === 'rgb(18, 52, 86)' && nudge.bg === 'rgb(250, 250, 250)' && nudge.surface === 'rgb(238, 238, 221)' && nudge.border === 'rgb(171, 205, 239)' && nudge.font === 'monospace', JSON.stringify(nudge));
+  ok('工作台·圆角间距字号动效真实消费', nudge.radius === '18px' && parseFloat(nudge.padding) > 20 && parseFloat(nudge.title) > 28 && nudge.transition.includes('0.36s'));
+  await page.evaluate(() => document.documentElement.removeAttribute('style'));
+  await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+  ok('无障碍·减少动效设置有效', await page.$eval('.hero-sample', (e) => parseFloat(getComputedStyle(e).transitionDuration) < 0.01));
+  await page.setViewport({ width: 320, height: 740, isMobile: true, hasTouch: true });
+  ok('移动·320像素窄屏不溢出', await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  await page.close();
+  await context.close();
+}
 
 // ================= 桌面 1440×900 =================
 {
